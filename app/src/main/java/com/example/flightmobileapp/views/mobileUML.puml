@@ -1,0 +1,80 @@
+@startuml
+class MainActivity{
+ViewModel vm
+}
+MainActivity : onCreate(Bundle savedInstanceState)
+MainActivity : runMe(View view, String message)
+
+class Joystick{
+Paint mPaint
+float aileron
+float elevator
+}
+Joystick : void onDraw(Canvas canvas)
+Joystick : void onChange(float aileron, float elevator)
+
+class ViewModel{
+FGPlayer fg
+Joystick js
+String successMessage
+String errorMessage
+String connectMessage
+}
+ViewModel : String getConnectMessage()
+ViewModel : void setConnectMessage(String connectMessage)
+ViewModel : void setUserIP(String IP)
+ViewModel : String getUserIP()
+ViewModel : String getUserPort()
+ViewModel : void setUserPort(String Port)
+ViewModel : boolean isInputDataValid()
+ViewModel : void onConnectClicked()
+ViewModel : void setRudderValue(int rudder)
+ViewModel : int getRudderValue()
+ViewModel : void setThrottleValue(int throttle)
+ViewModel : int getThrottleValue()
+ViewModel : void setAileronValue(float aileron)
+ViewModel : float getAileronValue()
+ViewModel : void setElevatorValue(float elevator)
+ViewModel : float getElevatorValue()
+ViewModel : void onChange()
+
+class FGPlayer{
+String IP
+String port
+boolean stop
+float throttle
+float rudder
+float aileron
+float elevator
+Socket fg
+PrintWriter out
+BlockingQueue<Runnable> dispatchQueue
+}
+FGPlayer : void setIP(String IP)
+FGPlayer : String getIP()
+FGPlayer : void setPort(String port)
+FGPlayer : String getPort()
+FGPlayer : void setThrottle(float throttle)
+FGPlayer : float getThrottle()
+FGPlayer : float getRudder()
+FGPlayer : float getAileron()
+FGPlayer : void setAileron(float aileron)
+FGPlayer : float getElevator()
+FGPlayer : int connectToSim()
+
+class BaseObservalble
+
+class View
+
+class AppCompatActivity
+
+BaseObservalble <|--  ViewModel
+
+View <|--  Joystick
+
+AppCompatActivity <|--  MainActivity
+
+MainActivity o-- ViewModel
+
+ViewModel o-- FGPlayer
+@enduml

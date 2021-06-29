@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.example.flightmobileapp.view_model.ViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <EditText
+            android:id="@+id/inIP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="93dp"
+            android:layout_marginTop="99dp"
+            android:layout_marginEnd="109dp"
+            android:ems="10"
+            android:hint="IP"
+            android:inputType="text"
+            android:text="@={viewModel.userIP}"
+            app:layout_constraintBottom_toTopOf="@+id/inPort"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/inPort"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="93dp"
+            android:layout_marginEnd="109dp"
+            android:layout_marginBottom="23dp"
+            android:ems="10"
+            android:hint="Port"
+            android:inputType="number"
+            android:text="@={viewModel.userPort}"
+            app:layout_constraintBottom_toTopOf="@+id/connectButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inIP" />
+
+        <Button
+            android:id="@+id/connectButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="149dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="168dp"
+            android:layout_marginBottom="174dp"
+            android:onClick="@{()-> viewModel.onConnectClicked()}"
+            android:text="CONNECT"
+            app:layout_constraintBottom_toTopOf="@+id/throttleSeekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/inPort"
+            bind:connectMessage="@{viewModel.connectMessage}" />
+
+        <SeekBar
+            android:id="@+id/rudderSeekBar"
+            android:layout_width="363dp"
+            android:layout_height="69dp"
+            android:layout_marginStart="19dp"
+            android:layout_marginTop="147dp"
+            android:layout_marginEnd="29dp"
+            android:layout_marginBottom="25dp"
+            android:max="2000"
+            android:progress="@={viewModel.rudderValue}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/throttleSeekBar" />
+
+        <SeekBar
+            android:id="@+id/throttleSeekBar"
+            android:layout_width="328dp"
+            android:layout_height="56dp"
+            android:layout_marginTop="163dp"
+            android:layout_marginEnd="211dp"
+            android:max="1000"
+            android:progress="@={viewModel.throttleValue}"
+            android:rotation="-90"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/connectButton" />
+
+        <Space
+            android:id="@+id/space"
+            android:layout_width="4dp"
+            android:layout_height="4dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="304dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.example.flightmobileapp.views.Joystick
+            android:id="@+id/joystick"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginBottom="23dp"
+            app:layout_constraintBottom_toTopOf="@+id/rudderSeekBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/space"
+            app:layout_constraintTop_toBottomOf="@+id/connectButton"
+            android:onClick="@{() -> viewModel.onChange()}"
+            android:background="@android:color/transparent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</layout>
